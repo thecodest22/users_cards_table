@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Карты</title>
+</head>
+
+<body class="body">
+  <header class="header body__full_width">
+    <div class="header__wrapper">
+      <div class="header__container">
+        <nav class="nav header__nav">
+          <ul class="nav-items">
+            <li class="nav-item">
+              <a href="#" id="cardsApiLink">Карты</a>
+            </li>
+            <li class="nav-item">
+              <a href="#" id="usersApiLink">Пользователи</a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+    <div class="header__filter">
+      <input type="number" id="filterCardNumber" placeholder="Фильтровать по номеру карты">
+      <button id="filterApply">Применить</button>
+      <button id="filterReset">Сбросить фильтр</button>
+    </div>
+  </header>
+
+  <main class="main body__main">
+    <section class="data-table">
+      <div class="data-table__wrapper">
+        <div class="data-table__container" id="data-table__container">
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer body__footer">
+    <div class="footer__wrapper">
+      <div class="footer__container">
+        <p class="footer__data">Test footer data</p>
+      </div>
+    </div>
+  </footer>
+
+  <script type="module" src="scripts.js"></script>
+</body>
+</html>
