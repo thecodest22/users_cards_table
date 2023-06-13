@@ -1,9 +1,10 @@
 document.addEventListener('DOMContentLoaded', function() {
   const cardsApiLink = document.getElementById('cardsApiLink');
   const usersApiLink = document.getElementById('usersApiLink');
-  const filterCardsInput = document.getElementById('filterCardNumber');
-  const filterCardsApply = document.getElementById('filterApply');
-  const filterCardsReset = document.getElementById('filterReset');
+  
+  const filterCardsInput = document.getElementById('filterCardNumberInput');
+  const filterCardsApply = document.getElementById('filterCardNumberApply');
+  const filterCardsReset = document.getElementById('filterCardNumberReset');
 
   cardsApiLink.addEventListener('click', function(event) {
     event.preventDefault();
@@ -18,8 +19,21 @@ document.addEventListener('DOMContentLoaded', function() {
   filterCardsApply.addEventListener('click', function () {
     const filterCardsValue = filterCardsInput.value;
     filterApply(filterCardsValue);
-  })
+  });
+  
+  filterCardsInput.addEventListener('keydown', function (event) {
+    if (event.key === 'Enter') {
+      const filterValue = filterCardsInput.value;
+      filterApply(filterValue);
+    }
+  });
+  
+  filterCardsReset.addEventListener('click', function (event) {
+    filterCardsInput.value = '';
+    filterApply('');
+  });
 });
+
 
 function getDataFromApi(url, tableName) {
   fetch(url)
@@ -70,4 +84,21 @@ function getDataFromApi(url, tableName) {
       }
     })
     .catch(error => console.log('Ошибка при получении данных:', error));
+}
+
+function filterApply(filterValue) {
+  const tableContainer = document.getElementById('data-table__container');
+  const table = tableContainer.querySelector('table');
+  const tableRows = table.querySelectorAll('tbody tr');
+
+  tableRows.forEach(row => {
+    console.log(row)
+    const cardNumber = row.cells[1].innerText;
+    console.log(cardNumber)
+    if (!cardNumber.includes(filterValue)) {
+      row.style.display = 'none';
+    } else {
+      row.style.display = 'table-row'
+    }
+  });
 }
