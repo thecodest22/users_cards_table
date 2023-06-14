@@ -70,7 +70,7 @@ document.addEventListener('DOMContentLoaded', function() {
     
     
     // Работаем с контентом таблицы - получаем ответ от АПИ, строим таблицу, помещаем таблицу в контейнер
-    getDataFromApi('https://fakerapi.it/api/v1/credit_cards?_quantity=100')
+    getDataFromApi('https://fakerapi.it/api/v1/credit_cards?_quantity=2')
         .then(responseJson => buildTable(responseJson, 'Cards data table'))
         .then(table => {
           tableElement = table.cloneNode(true);
@@ -146,31 +146,35 @@ function buildTable(jsonData, tableName) {
   console.log(jsonData);
   
   const table = document.createElement('table');
-  table.setAttribute('class', 'table');
+  table.setAttribute('class', 'table table-container__table');
   
   const tableCaption = document.createElement('caption');
-  tableCaption.setAttribute('class', 'table-caption');
+  tableCaption.setAttribute('class', 't-caption table__caption');
   tableCaption.innerText = tableName;
   
   const tableHeader = document.createElement('thead');
-  tableHeader.setAttribute('class', 'table-header');
+  tableHeader.setAttribute('class', 't-header table__header');
   
   const tableHeaderRow = document.createElement('tr');
+  tableHeaderRow.setAttribute('class', 't-row table__row');
   for (const tableColumnName in jsonData.data[0]) {
-    const tableData = document.createElement('td');
-    tableData.innerText = tableColumnName;
-    tableHeaderRow.appendChild(tableData);
+    const tableHeaderData = document.createElement('th');
+    tableHeaderData.setAttribute('class', 't-header-cell table__column');
+    tableHeaderData.innerText = tableColumnName;
+    tableHeaderRow.appendChild(tableHeaderData);
   }
   tableHeader.appendChild(tableHeaderRow);
   
   const tableBody = document.createElement('tbody');
-  tableBody.setAttribute('class', 'table-body');
+  tableBody.setAttribute('class', 't-body table__body');
   
   jsonData.data.forEach(cardData => {
     const tableRow = document.createElement('tr');
+    tableRow.setAttribute('class', 't-row table__row');
     const tableColumnValues = Object.values(cardData);
     tableColumnValues.forEach(value => {
       const tableData = document.createElement('td');
+      tableData.setAttribute('class', 't-body-data table__column')
       tableData.innerText = value;
       tableRow.appendChild(tableData);
     });
