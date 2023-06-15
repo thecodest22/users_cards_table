@@ -97,8 +97,6 @@ document.addEventListener('DOMContentLoaded', function() {
     // Вешаем слушатели для сортировки юзеров по имени и для сброса сортировки
     sortApplyButton.addEventListener('click', function () {
       if (usersSortedByName) {
-        console.log('SORTED FOUND!');
-        console.log(usersSortedByName);
         addTableToHtml(usersSortedByName, tableContainer);
       } else {
         usersSortedByName = tableElement.cloneNode(true);

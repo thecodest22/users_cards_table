@@ -1,5 +1,5 @@
 .footer {
-  margin-top: auto;
+  width: 100%;
   background: var(--color-light-blue);
 
   &__wrapper {
@@ -16,6 +16,6 @@
     margin: 0;
     font-size: 2rem;
     font-weight: 700;
-    color: #fff;
+    color: var(--color-light-background);
   }
 }

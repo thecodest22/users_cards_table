@@ -20,6 +20,8 @@
 
 :root {
   --width-wrapper-full-width: 134rem;
+  --padding-top-main: 0;
+  --padding-bottom-main: 0;
   font-size: 10px;
   --font-size-tcells: 0;
   --color-dark-blue: #417690;
@@ -66,6 +68,27 @@
   outline: none;
 }
 
+.body {
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  font-family: "MuseoSans", sans-serif;
+  font-size: 1.6rem;
+  line-height: 1;
+  color: var(--color-middle-grey);
+  background: var(--color-light-background);
+}
+.body__header, .body__footer {
+  position: fixed;
+  z-index: 10;
+}
+.body__footer {
+  bottom: 0;
+}
+
+.header {
+  width: 100%;
+}
 .header__wrapper {
   flex: 1;
   max-width: var(--width-wrapper-full-width);
@@ -92,20 +115,9 @@
   color: var(--color-dark-grey);
 }
 
-.body {
-  margin: 0;
-  padding: 0;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  font-family: "MuseoSans", sans-serif;
-  font-size: 1.6rem;
-  line-height: 1;
-  color: var(--color-middle-grey);
-  background: var(--color-light-background);
-}
-.body__header, .body__main {
-  margin-bottom: 3rem;
+.main {
+  padding-top: var(--padding-top-main);
+  padding-bottom: var(--padding-bottom-main);
 }
 
 .section__wrapper {
@@ -167,7 +179,7 @@
 }
 
 .footer {
-  margin-top: auto;
+  width: 100%;
   background: var(--color-light-blue);
 }
 .footer__wrapper {
@@ -182,7 +194,7 @@
   margin: 0;
   font-size: 2rem;
   font-weight: 700;
-  color: #fff;
+  color: var(--color-light-background);
 }
 
 /*# sourceMappingURL=styles.css.map */

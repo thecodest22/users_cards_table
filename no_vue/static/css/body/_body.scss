@@ -2,15 +2,18 @@
   margin: 0;
   padding: 0;
   min-height: 100vh;
-  display: flex;
-  flex-direction: column;
   font-family: 'MuseoSans', sans-serif;
   font-size: 1.6rem;
   line-height: 1;
   color: var(--color-middle-grey);
   background: var(--color-light-background);
 
-  &__header, &__main {
-    margin-bottom: 3rem;
+  &__header, &__footer {
+    position: fixed;
+    z-index: 10;
+  }
+
+  &__footer {
+    bottom: 0;
   }
 }
