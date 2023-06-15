@@ -1,0 +1,5 @@
+.t-body-row {
+  &:nth-child(even) {
+    background: var(--color-table-body-highlight);
+  }
+}

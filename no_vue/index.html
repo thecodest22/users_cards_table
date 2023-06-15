@@ -10,25 +10,28 @@
 </head>
 
 <body class="body">
-  <header class="header body__full_width" id="bodyHeader">
-    <div class="header__wrapper">
-      <div class="header__container">
-        <nav class="nav header__nav">
-          <ul class="nav-items">
-            <li class="nav-item">
-              <a href="#" id="cardsApiLink">Карты</a>
-            </li>
-            <li class="nav-item">
-              <a href="#" id="usersApiLink">Пользователи</a>
-            </li>
-          </ul>
-        </nav>
+  <header class="header body__header">
+    <div class="flexbox header__top-bar">
+      <div class="header__wrapper">
+        <div class="flexbox header__container">
+          <button class="button header__button" id="load-cards-list">Список карт</button>
+          <button class="button header__button" id="load-users-list">Список пользователей</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="flexbox header__bottom-bar">
+      <div class="header__wrapper">
+        <div class="flexbox header__container">
+          <label class="header__label" for="load-entries-number">Количество записей:</label>
+          <input type="number" class="input header__input" id="load-entries-number" value="100">
+        </div>
       </div>
     </div>
   </header>
 
   <main class="main body__main">
-    <section class="section main__section">
+    <section class="flexbox section">
       <div class="section__wrapper">
         <div class="section__container" id="section-container">
         </div>
@@ -36,10 +39,10 @@
     </section>
   </main>
 
-  <footer class="footer body__footer">
+  <footer class="footer flexbox">
     <div class="footer__wrapper">
-      <div class="footer__container">
-        <p class="footer__data">Test footer data</p>
+      <div class="flexbox footer__container">
+        <p class="footer__content">Бери Пашку на работу! )</p>
       </div>
     </div>
   </footer>

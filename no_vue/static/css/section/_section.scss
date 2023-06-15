@@ -1,0 +1,7 @@
+.section {
+  &__wrapper {
+    flex: 1;
+    max-width: var(--width-wrapper-full-width);
+    padding: 0 1.5rem;
+  }
+}

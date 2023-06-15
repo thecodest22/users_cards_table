@@ -1,0 +1,21 @@
+.footer {
+  margin-top: auto;
+  background: var(--color-light-blue);
+
+  &__wrapper {
+    flex: 1;
+    max-width: var(--width-wrapper-full-width);
+    padding: 0 2.5rem;
+  }
+
+  &__container {
+    padding: 2rem 0;
+  }
+
+  &__content {
+    margin: 0;
+    font-size: 2rem;
+    font-weight: 700;
+    color: #fff;
+  }
+}

@@ -1,0 +1,23 @@
+.table-controls {
+  margin-bottom: 2rem;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+
+  &__error-message {
+    margin: 0 0 1rem 0;
+    flex-basis: 100%;
+    text-align: center;
+  }
+
+  &__input {
+    margin-right: 2rem;
+    width: auto;
+  }
+
+  &__button {
+    &:not(:last-child) {
+      margin-right: 2rem;
+    }
+  }
+}

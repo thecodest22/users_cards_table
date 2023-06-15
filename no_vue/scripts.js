@@ -1,8 +1,10 @@
 let tableContentMaxLen = 0;
 
 document.addEventListener('DOMContentLoaded', function() {
-  const cardsApiLink = document.getElementById('cardsApiLink');
-  const usersApiLink = document.getElementById('usersApiLink');
+  // Получаем элементы запуска загрузки по api
+  const cardsApiButton = document.getElementById('load-cards-list');
+  const usersApiButton = document.getElementById('load-users-list');
+  const entriesNumber = document.getElementById('load-entries-number');
   
   // Получаем элемент контейнера секции, куда добавляем элемент контролов таблицы и самой таблицы
   const sectionContainer = document.getElementById('section-container');
@@ -18,7 +20,7 @@ document.addEventListener('DOMContentLoaded', function() {
   let tableElement = null;
   let usersSortedByName = null;
   
-  cardsApiLink.addEventListener('click', function(event) {
+  cardsApiButton.addEventListener('click', function(event) {
     event.preventDefault();  /*Глушим дефолтное действие элемента*/
     
     // Очищаем все содержимое - и контролы, и саму таблицу. Обнуляем максимальную длину контента в таблице
@@ -31,16 +33,16 @@ document.addEventListener('DOMContentLoaded', function() {
     errorOutputBlock.hidden = true;
     
     const filterInputField = document.createElement('input');
-    filterInputField.setAttribute('class', 'input table-controls__input');
+    filterInputField.setAttribute('class', 'input input_size_s table-controls__input');
     filterInputField.setAttribute('type', 'number');
-    filterInputField.setAttribute('placeholder', 'Номер карты или его часть');
+    filterInputField.setAttribute('placeholder', 'Номер или его часть');
     
     const filterApplyButton = document.createElement('button');
-    filterApplyButton.setAttribute('class', 'button table-controls__button');
+    filterApplyButton.setAttribute('class', 'button button_size_s table-controls__button');
     filterApplyButton.innerText = 'Применить';
     
     const filterResetButton = document.createElement('button');
-    filterResetButton.setAttribute('class', 'button table-controls__button');
+    filterResetButton.setAttribute('class', 'button button_size_s table-controls__button');
     filterResetButton.innerText = 'Сбросить фильтр';
     
     // Вешаем на контролы слушатели для запуска фильтрации или сброса фильтров
@@ -56,7 +58,7 @@ document.addEventListener('DOMContentLoaded', function() {
     
     filterResetButton.addEventListener('click', function () {
       if (tableElement) {
-        addTableToHtml(tableElement, tableContainer);
+        addTableToHtml(tableElement, tableContainer, true);
         filterInputField.focus();
         filterInputField.select();
       }
@@ -67,17 +69,16 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Добавляем блок контролов и контейнер таблицы в основной контейнер
     sectionContainer.append(controlsContainer, tableContainer);
-    
     // Работаем с контентом таблицы - получаем ответ от АПИ, строим таблицу, помещаем таблицу в контейнер
-    getDataFromApi('https://fakerapi.it/api/v1/credit_cards?_quantity=100')
+    getDataFromApi(`https://fakerapi.it/api/v1/credit_cards?_quantity=${entriesNumber.value}`)
         .then(responseJson => buildTable(responseJson, 'Cards data table'))
         .then(table => {
-          tableElement = table.cloneNode(true);
-          addTableToHtml(table, tableContainer);
+          tableElement = table;
+          addTableToHtml(tableElement, tableContainer, true);
         });
   });
 
-  usersApiLink.addEventListener('click', function(event) {
+  usersApiButton.addEventListener('click', function(event) {
     event.preventDefault();  /*Глушим дефолтное действие элемента*/
     
     // Очищаем все содержимое - и контролы, и саму таблицу. Обнуляем максимальную длину контента в таблице
@@ -86,16 +87,18 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Создаем элементы управления - кнопки, инпуты, вешаем атрибуты, потом добавляем все элементы в контейнер
     const sortApplyButton = document.createElement('button');
-    sortApplyButton.setAttribute('class', 'button table-controls__button');
+    sortApplyButton.setAttribute('class', 'button button_size_s table-controls__button');
     sortApplyButton.innerText = 'Сортировать по имени';
     
     const sortResetButton = document.createElement('button');
-    sortResetButton.setAttribute('class', 'button table-controls__button');
+    sortResetButton.setAttribute('class', 'button button_size_s table-controls__button');
     sortResetButton.innerText = 'Сбросить сортировку';
     
     // Вешаем слушатели для сортировки юзеров по имени и для сброса сортировки
     sortApplyButton.addEventListener('click', function () {
       if (usersSortedByName) {
+        console.log('SORTED FOUND!');
+        console.log(usersSortedByName);
         addTableToHtml(usersSortedByName, tableContainer);
       } else {
         usersSortedByName = tableElement.cloneNode(true);
@@ -113,9 +116,8 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Добавляем блок контролов и контейнер таблицы в основной контейнер
     sectionContainer.append(controlsContainer, tableContainer);
-    
     // Работаем с контентом таблицы - получаем ответ от АПИ, строим таблицу, помещаем таблицу в контейнер
-    getDataFromApi('https://fakerapi.it/api/v1/users?_quantity=100')
+    getDataFromApi(`https://fakerapi.it/api/v1/users?_quantity=${entriesNumber.value}`)
         .then(responseJson => buildTable(responseJson, 'Users data table'))
         .then(table => {
           tableElement = table.cloneNode(true);
@@ -139,20 +141,19 @@ function getDataFromApi(apiUrl) {
 }
 
 function buildTable(jsonData, tableName) {
-  // let tableContentMaxLen = 0;
   
   const table = document.createElement('table');
   table.setAttribute('class', 'table table-container__table');
   
-  const tableCaption = document.createElement('caption');
-  tableCaption.setAttribute('class', 't-caption table__caption');
-  tableCaption.innerText = tableName;
+  // const tableCaption = document.createElement('caption');
+  // tableCaption.setAttribute('class', 't-caption table__caption');
+  // tableCaption.innerText = tableName;
   
   const tableHeader = document.createElement('thead');
   tableHeader.setAttribute('class', 't-header table__header');
   
   const tableHeaderRow = document.createElement('tr');
-  tableHeaderRow.setAttribute('class', 't-row table__row');
+  tableHeaderRow.setAttribute('class', 't-header-row table__row');
   for (const tableColumnName in jsonData.data[0]) {
     const tableHeaderData = document.createElement('th');
     tableHeaderData.setAttribute('class', 't-header-cell table__cell');
@@ -166,12 +167,12 @@ function buildTable(jsonData, tableName) {
   
   jsonData.data.forEach(cardData => {
     const tableRow = document.createElement('tr');
-    tableRow.setAttribute('class', 't-row table__row');
+    tableRow.setAttribute('class', 't-body-row table__row');
     
     const tableColumnValues = Object.values(cardData);
     tableColumnValues.forEach(value => {
       const tableData = document.createElement('td');
-      tableData.setAttribute('class', 't-body-data table__cell')
+      tableData.setAttribute('class', 't-body-cell table__cell')
       tableData.innerText = value;
       tableRow.appendChild(tableData);
       
@@ -183,20 +184,23 @@ function buildTable(jsonData, tableName) {
     tableBody.appendChild(tableRow);
   });
   
-  table.appendChild(tableCaption);
-  table.appendChild(tableHeader);
-  table.appendChild(tableBody);
+  // table.append(tableCaption, tableHeader, tableBody);
+  table.append(tableHeader, tableBody);
   
   return table;
 }
 
-function addTableToHtml(tableContent, htmlTableContainer) {
-  // const event = new Event('resize', {bubbles: true});
+function addTableToHtml(tableElem, htmlTableContainer, clone = false) {
   const myEvent = new CustomEvent('resize', {bubbles: true, detail: tableContentMaxLen})
-  
   htmlTableContainer.innerHTML = '';
-  htmlTableContainer.appendChild(tableContent);
-  // htmlTableContainer.dispatchEvent(event);
+  
+  if (clone) {
+    const clonedTable = tableElem.cloneNode(true);
+    htmlTableContainer.appendChild(clonedTable);
+  } else {
+    htmlTableContainer.appendChild(tableElem);
+  }
+  
   htmlTableContainer.dispatchEvent(myEvent);
 }
 
