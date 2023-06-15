@@ -1,0 +1,41 @@
+@font-face {
+  font-family: "MuseoSans";
+  src: url("../fonts/MuseoSansCyrl300.woff2") format("woff2"), url("../fonts/MuseoSansCyrl300.woff") format("woff");
+  font-weight: 300;
+}
+@font-face {
+  font-family: "MuseoSans";
+  src: url("../fonts/MuseoSansCyrl300Italic.woff2") format("woff2"), url("../fonts/MuseoSansCyrl300Italic.woff") format("woff");
+  font-weight: 300;
+  font-style: italic;
+}
+@font-face {
+  font-family: "MuseoSans";
+  src: url("../fonts/MuseoSansCyrl500.woff2") format("woff2"), url("../fonts/MuseoSansCyrl500.woff") format("woff");
+  font-weight: 500;
+}
+:root {
+  font-size: 10px;
+  --font-size-tcells: 0;
+}
+
+.body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  font-family: "MuseoSans", sans-serif;
+  font-size: 1.6rem;
+  line-height: 2;
+}
+
+.table-container__table {
+  width: 100%;
+  table-layout: fixed;
+  border-collapse: collapse;
+}
+
+.table__cell {
+  font-size: min(var(--font-size-tcells), 1.8rem);
+}
+
+/*# sourceMappingURL=styles.css.map */

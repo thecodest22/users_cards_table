@@ -1,0 +1,11 @@
+//Подключаем шрифты
+@import "../fonts/fonts";
+
+//Подключаем переменные
+@import "vars/vars";
+
+//Подключаем стили проекта
+@import "root/root";
+@import "body/body";
+@import "table-container/table-container";
+@import "table/table";

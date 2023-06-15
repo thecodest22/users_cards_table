@@ -1,0 +1,5 @@
+.table {
+  &__cell {
+    font-size: min(var(--font-size-tcells), 1.8rem);
+  }
+}
