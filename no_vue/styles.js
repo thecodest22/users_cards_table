@@ -14,14 +14,15 @@ window.addEventListener('resize', function(event) {
     // isTrusted - создано ли событие реальными действиями или же кодом.
     if (!event.isTrusted) {
       maxTextLength = event.detail;
-      const adjustmentFactor = 1.7  /*Поправочный коэффициент. Зависит от шрифта. Подбирается опытным путем*/
-      const newFontSize = size / maxTextLength * adjustmentFactor + "px";
-      
-      root.style.setProperty('--font-size-tcells', newFontSize);
     }
+    
+    const adjustmentFactor = 1.7  /*Поправочный коэффициент. Зависит от шрифта. Подбирается опытным путем*/
+    const newFontSize = size / maxTextLength * adjustmentFactor + "px";
+    root.style.setProperty('--font-size-tcells', newFontSize);
   }
   
   const rem = parseFloat(getComputedStyle(root).getPropertyValue('font-size'));
+  // 3 - это просто коэффициент. Это вместо "margin-bottom". То есть, будет расстояние 3 REMа. Как улучшить?
   const newPaddingTop = header.offsetHeight + rem * 3;
   const newPaddingBottom = footer.offsetHeight + rem * 3;
   
