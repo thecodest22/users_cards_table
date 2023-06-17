@@ -29,3 +29,23 @@ window.addEventListener('resize', function(event) {
   root.style.setProperty('--padding-top-main', newPaddingTop + "px");
   root.style.setProperty('--padding-bottom-main', newPaddingBottom + "px");
 });
+
+window.addEventListener('DOMContentLoaded', () => {
+  const scrollToTopButton = document.getElementById('button-to-top');
+  
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 150) {
+      scrollToTopButton.classList.remove('button-to-top_hidden');    
+    } else {
+      scrollToTopButton.classList.add('button-to-top_hidden');
+    }
+  });
+  
+  scrollToTopButton.addEventListener('click', () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth"
+    });
+  });
+});
+

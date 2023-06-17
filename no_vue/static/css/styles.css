@@ -55,6 +55,26 @@
   font-weight: 500;
 }
 
+.button-to-top {
+  z-index: 1;
+  border: 2px solid var(--color-light-grey);
+  border-radius: 1rem;
+  background: var(--color-table-body-highlight);
+  opacity: 1;
+  transition: opacity 1s;
+  transform: rotate(-90deg);
+}
+.button-to-top:hover {
+  background: var(--color-table-header-highlight);
+  transition: background-color 0.5s;
+  cursor: pointer;
+}
+.button-to-top_hidden {
+  z-index: -1;
+  opacity: 0;
+  transition: opacity 1s;
+}
+
 .input {
   padding: 0.5rem;
   font: inherit;
@@ -118,6 +138,11 @@
 .main {
   padding-top: var(--padding-top-main);
   padding-bottom: var(--padding-bottom-main);
+}
+.main__button-to-top {
+  position: fixed;
+  right: 6rem;
+  bottom: calc(var(--padding-bottom-main) + 3rem);
 }
 
 .section__wrapper {

@@ -1,4 +1,10 @@
 .main {
   padding-top: var(--padding-top-main);
   padding-bottom: var(--padding-bottom-main);
+
+  &__button-to-top {
+    position: fixed;
+    right: 6rem;
+    bottom: calc(var(--padding-bottom-main) + 3rem);
+  }
 }
